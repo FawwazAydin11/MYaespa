@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aespa Fan Site</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & Global Styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background-color: #fff;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+    
+    /* Header */
+    header {
+      background-image: url('./images/header aespa.jpg');
+      background-size: cover;
+      background-position: center;
+      color: #bf00ff;
+      padding: 170px 20px;
+      text-align: center;
+    }
+    header .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    header h1 {
+      font-family: 'aespa', Arial, sans-serif;
+      font-size: 12.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #8022ae;
+      text-shadow: 4px 4px 6px rgba(255, 255, 255, 1);
+    }
+    
+    /* Navigation */
+    nav {
+      background: #223055;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      flex-wrap: wrap;
+    }
+    nav ul li { margin: 0 15px; }
+    .nav-link,
+    .menu-home,
+    .menu-tentang,
+    .menu-anggota,
+    .menu-prestasi,
+    .menu-album,
+    .menu-galeri {
+      background-color: #223055;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    nav ul li a.active {
+      background-color: #17213b;
+      color: #fff;
+    }
+    nav ul li a:hover {
+      opacity: 0.8;
+    }
+    @font-face {
+      font-family: 'aespa';
+      src: url('./fonts/aespa.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    
+    /* Section & Content */
+    .section {
+      padding: 60px 20px;
+    }
+    .section-content {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .section.visible .section-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .section h2 { text-align: center; margin-bottom: 40px; font-size: 2rem; }
+    .section h3 { text-align: center; margin: 30px 0 15px; font-size: 1.5rem; }
+    #tentang p,
+    #home .section-content p {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+    
+    /* Prestasi Section - Interaktif */
+    .achievement-group { margin-bottom: 20px; }
+    .year-toggle {
+      cursor: pointer;
+      background-color: #f7f7f7;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin: 10px 0;
+      transition: background-color 0.3s ease;
+    }
+    .year-toggle:hover { background-color: #eaeaea; }
+    .achievements {
+      list-style: none;
+      padding-left: 20px;
+      margin-top: 5px;
+    }
+    .achievements li {
+      background: #f1f1f1;
+      padding: 10px;
+      margin-bottom: 5px;
+      border-left: 5px solid #FF416C;
+      border-radius: 4px;
+    }
+    
+    /* Anggota */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .member-card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .member-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .member-card img { 
+      height: 200px; 
+      object-fit: cover; 
+      width: 100%; 
+    }
+    .card-content { padding: 15px; }
+    .card-content h3 { margin-bottom: 10px; font-size: 1.3rem; }
+    .card-content p { font-size: 0.9rem; color: #666; }
+    
+    /* Diskografi Grid */
+    .album-grid,
+    .mini-album-grid,
+    .single-digital-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+      justify-items: center;
+    }
+    .album-item {
+      position: relative;
+      width: 250px;
+      height: 140px;
+      cursor: pointer;
+      overflow: hidden;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .album-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .album-item img { width: 100%; height: auto; }
+    .album-item .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      padding: 10px;
+      font-size: 0.9rem;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .album-item:hover .caption { opacity: 1; }
+    .album-description {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 10px;
+      text-align: center;
+    }
+    
+    /* Galeri */
+    .slider {
+      position: relative;
+      overflow: hidden;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .slides { 
+      display: flex; 
+      transition: transform 0.5s ease-in-out; 
+    }
+    .slide { min-width: 100%; }
+    .slide img { width: 100%; height: auto; }
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: transform 0.2s ease;
+    }
+    .prev:hover, .next:hover { transform: translateY(-50%) scale(1.1); }
+    .prev { left: 10px; }
+    .next { right: 10px; }
+    
+    /* Footer */
+    footer {
+      background: #111cb0;
+      padding: 5px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ffffff;
+    }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 200;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+    }
+    .modal-content {
+      background: #fff;
+      margin: 100px auto;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 500px;
+      position: relative;
+      animation: fadeInModal 0.5s ease;
+    }
+    .modal-content .close {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    @keyframes fadeInModal {
+      from { opacity: 0; transform: scale(0.9); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    
+    /* Section Background Colors */
+    #home { background-color: #ffb7ca; }
+    #tentang { background-color: #f2bbc5; }
+    #anggota { background-color: #7ba6de; }
+    #prestasi { background-color: #9595d2; }
+    #diskografi { background-color: #a191d9; }
+    #galeri { background-color: #766bbf; }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 600px) {
+      header { padding: 100px 20px; }
+      header h1 { font-size: 5rem; }
+      nav ul { flex-direction: row; align-items: center; }
+      nav ul li { margin: 3px 0; }
+      .nav-link,
+      .menu-home,
+      .menu-tentang,
+      .menu-anggota,
+      .menu-prestasi,
+      .menu-album,
+      .menu-galeri {
+        padding: 5px 10px;
+        font-size: 0.6rem;
+      }
+      .album-item { width: 90%; height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>MY aespa</h1>
+    </div>
+  </header>
+  
+  <nav>
+    <div class="container">
+      <ul>
+        <li><a href="#home" class="nav-link menu-home active">Beranda</a></li>
+        <li><a href="#tentang" class="nav-link menu-tentang">Tentang</a></li>
+        <li><a href="#anggota" class="nav-link menu-anggota">Anggota</a></li>
+        <li><a href="#prestasi" class="nav-link menu-prestasi">Prestasi</a></li>
+        <li><a href="#diskografi" class="nav-link menu-album">Diskografi</a></li>
+        <li><a href="#galeri" class="nav-link menu-galeri">Galeri</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- Home Section -->
+  <section id="home" class="section">
+    <div class="container section-content">
+      <h2>Selamat Datang!</h2>
+      <p>
+        Selamat datang di dunia Aespa, tempat di mana semua penggemar bisa lebih dekat dengan idolanya! Di sini, kamu bisa menemukan semua hal menarik tentang Aespa—mulai dari perjalanan mereka sebagai bintang K-pop hingga karya-karya terbaik yang memukau dunia. Jelajahi galeri, kenali anggota favoritmu lebih dalam, dan bangga dengan semua prestasi luar biasa yang telah mereka raih. Yuk, rayakan kecintaan kita pada Aespa bersama-sama!
+      </p>
+    </div>
+  </section>
+  
+  <!-- Tentang Section -->
+  <section id="tentang" class="section">
+    <div class="container section-content">
+      <h2>Tentang Aespa</h2>
+      <p>
+        Aespa adalah grup K-pop inovatif yang berada di bawah naungan SM Entertainment. Grup ini dikenal dengan konsep futuristik yang menyatukan dunia nyata dan digital melalui avatar khusus yang mewakili masing-masing anggota—Karina, Giselle, Winter, dan Ningning. Mereka memulai debutnya pada 17 November 2020 dengan single "Black Mamba," yang sekaligus menandai hadirnya pendekatan interaktif dan modern di industri hiburan. Konsep "Avatar X Experience" menghadirkan pengalaman menonton yang memukau dengan perpaduan musik, visual, dan teknologi yang segar.
+      </p>
+    </div>
+  </section>
+  
+  <!-- Anggota Section -->
+  <section id="anggota" class="section">
+    <div class="container section-content">
+      <h2>Anggota</h2>
+      <div class="grid">
+        <div class="member-card" data-index="0">
+          <img src="./images/karina.jpg" alt="Karina">
+          <div class="card-content">
+            <h3>Karina</h3>
+          </div>
+        </div>
+        <div class="member-card" data-index="1">
+          <img src="./images/winter.jpg" alt="Winter">
+          <div class="card-content">
+            <h3>Winter</h3>
+          </div>
+        </div>
+        <div class="member-card" data-index="2">
+          <img src="./images/giselle.jpg" alt="Giselle">
+          <div class="card-content">
+            <h3>Giselle</h3>
+          </div>
+        </div>
+        <div class="member-card" data-index="3">
+          <img src="./images/ningning.jpg" alt="Ningning">
+          <div class="card-content">
+            <h3>Ningning</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Prestasi Section (Interactive) -->
+  <section id="prestasi" class="section">
+    <div class="container section-content">
+      <h2>Prestasi</h2>
+      
+      <div class="achievement-group">
+        <h3 class="year-toggle">2021</h3>
+        <ul class="achievements">
+          <li>MAMA Awards Best New Female Artist.</li>
+          <li>Melon Music Awards Record of the Year.</li>
+          <li>Asian Artist Awards Stage of the Year.</li>
+          <li>Asian Pop Music Awards Top 20 Songs of the Year "Savage".</li>
+          <li>Circle Chart Music Awards New Artist of the Year – Digital "Black Mamba".</li>
+          <li>Seoul Music Awards Rookie of the Year.</li>
+        </ul>
+      </div>
+      
+      <div class="achievement-group">
+        <h3 class="year-toggle">2022</h3>
+        <ul class="achievements">
+          <li>Golden Disc Awards Best Digital Song "Next Level".</li>
+          <li>Asian Pop Music Awards Top 20 Songs of the Year "Girls".</li>
+          <li>Circle Chart Music Awards World Rookie of the Year.</li>
+          <li>Melon Music Awards Artist of the Year.</li>
+          <li>Hanteo Music Awards Artist of the Year.</li>
+          <li>Korean Music Awards Song of the Year "Next Level".</li>
+          <li>Seoul Music Awards Main Award.</li>
+        </ul>
+      </div>
+
+      <div class="achievement-group">
+        <h3 class="year-toggle">2023</h3>
+        <ul class="achievements">
+          <li>Asian Pop Music Awards Top 20 Songs of the Year "Better Things".</li>
+          <li>Asian Pop Music Awards Top 20 Albums of the Year "My World".</li>
+          <li>Hanteo Music Awards Artist of the Year.</li>
+          <li>K-Global Heart Dream Awards Best Music Award.</li>
+          <li>Melon Music Awards Best Female Performance.</li>
+          <li>Seoul Music Awards Main Award.</li>
+          <li>The Fact Music Awards Artist of the Year.</li>
+        </ul>
+      </div>
+
+      <div class="achievement-group">
+        <h3 class="year-toggle">2024</h3>
+        <ul class="achievements">
+          <li>Asia Artist Awards Best Artist Award – Music.</li>
+          <li>Asian Pop Music Awards Best Album of the Year "Armageddon".</li>
+          <li>Golden Disc Awards Best Album "My world".</li>
+          <li>Hanteo Music Awards Artist of the Year.</li>
+          <li>Hanteo Music Awards Best Artist.</li>
+          <li>Korea Grand Music Awards Grand Song.</li>
+          <li>MAMA Awards Song of the Year "Supernova".</li>
+          <li>MAMA Awards Best Female Group.</li>
+          <li>Melon Music Awards Album of the Year "Armageddon".</li>
+          <li>Melon Music Awards Artist of the Year.</li>
+          <li>Seoul Music Awards Main Award.</li>
+          <li>The Fact Music Awards Artist of the Year.</li>
+          <li>Tiktok Awards Korea Artist of the Year.</li>
+        </ul>
+      </div>
+
+      <div class="achievement-group">
+        <h3 class="year-toggle">2025</h3>
+        <ul class="achievements">
+          <li>Billboard Women in Music Group of the Year.</li>
+          <li>D Awards Song of the Year "Supernova".</li>
+          <li>Golden Disc Awards Best Album "Armageddon".</li>
+          <li>Golden Disc Awards Song of the Year "Supernova".</li>
+          <li>Korean Music Awards Best K-pop Album "Armageddon".</li>
+          <li>MTV Video Music Awards Japan Artist of the Year.</li>
+        </ul>
+      </div> 
+    </div>
+  </section>
+  
+  <!-- Diskografi Section -->
+  <section id="diskografi" class="section">
+    <div class="container section-content">
+      <h2>Diskografi</h2>
+      
+      <!-- Kategori Album -->
+      <h3>Album</h3>
+      <div class="album-grid"></div>
+      
+      <!-- Kategori Mini Album -->
+      <h3>Mini Album</h3>
+      <div class="mini-album-grid"></div>
+      
+      <!-- Kategori Single Digital -->
+      <h3>Single Digital</h3>
+      <div class="single-digital-grid"></div>
+    </div>
+  </section>
+  
+  <!-- Galeri Section -->
+  <section id="galeri" class="section">
+    <div class="container section-content">
+      <h2>Galeri</h2>
+      <div class="slider">
+        <div class="slides">
+          <div class="slide">
+            <img src="./images/galeri1.jpg" alt="Slide 1">
+          </div>
+          <div class="slide">
+            <img src="./images/galeri2.jpg" alt="Slide 2">
+          </div>
+          <div class="slide">
+            <img src="./images/galeri3.jpg" alt="Slide 3">
+          </div>
+          <div class="slide">
+            <img src="./images/galeri4.jpg" alt="Slide 4">
+          </div>
+          <div class="slide">
+            <img src="./images/galeri5.jpg" alt="Slide 5">
+          </div>
+          <div class="slide">
+            <img src="./images/galeri6.jpg" alt="Slide 6">
+          </div>
+          <div class="slide">
+            <img src="./images/galeri7.jpg" alt="Slide 7">
+          </div>
+          <div class="slide">
+            <img src="./images/galeri8.jpg" alt="Slide 8">
+          </div>
+          <div class="slide">
+            <img src="./images/galeri9.jpg" alt="Slide 9">
+          </div>
+          <div class="slide">
+            <img src="./images/galeri10.jpg" alt="Slide 10">
+          </div>
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
+    </div>
+  </section>
+  
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 MY Gresik. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <!-- Modals -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+  <div id="album-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="album-close">&times;</span>
+      <div id="album-modal-body"></div>
+    </div>
+  </div>
+  <div id="gallery-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="gallery-close">&times;</span>
+      <div id="gallery-modal-body"></div>
+    </div>
+  </div>
+  
+  <script>
+    $(function() {
+      $('.nav-link').click(function(e) {
+        e.preventDefault();
+        $('.nav-link').removeClass('active');
+        $(this).addClass('active');
+        var target = $(this).attr('href');
+        $('html, body').animate({ scrollTop: $(target).offset().top }, 500);
+      });
+      
+      
+      function checkSections() {
+        $('.section').each(function() {
+          if ($(window).scrollTop() + $(window).height() > $(this).offset().top + 100) {
+            $(this).addClass('visible');
+          }
+        });
+      }
+      $(window).on('scroll', checkSections);
+      checkSections();
+      
+      
+      $(window).on('scroll', function() {
+        var scrollPos = $(document).scrollTop();
+        $('.nav-link').each(function() {
+          var currLink = $(this);
+          var refElement = $(currLink.attr('href'));
+          if (refElement.position().top <= scrollPos + 50 &&
+              refElement.position().top + refElement.outerHeight() > scrollPos + 50) {
+            $('.nav-link').removeClass('active');
+            currLink.addClass('active');
+          } else {
+            currLink.removeClass('active');
+          }
+        });
+      });
+      
+      // Interaktivitas pada Prestasi
+      $('.achievements').hide();
+      $('.year-toggle').on('click', function(){
+        $(this).next('.achievements').slideToggle(300);
+        $(this).toggleClass('active');
+      });
+      
+      // Data penunjang
+      var members = [
+        { name: 'Karina', position: 'Leader, Main Dancer, Lead Rapper, Sub Vocalist, Center, Face of the Group', age: 24, description: 'Yu Ji-min (Hangul: 유지민), yang juga dikenal dengan nama panggungnya Karina (Hangul: 카리나), adalah anggota grup perempuan Korea Selatan aespa dan unit perempuan GOT the beat. Dia memulai debut solonya pada 9 Oktober 2024 dengan lagu "UP (Karina Solo)."', image: './images/karina.jpg' },
+        { name: 'Winter', position: 'Main Vocalist, Lead Dancer, Visual', age: 24, description: 'Kim Min-jeong (Hangul: 김민정), yang lebih dikenal dengan nama panggungnya Winter (Hangul: 윈터), adalah anggota girl group Korea Selatan aespa dan juga bagian dari unit perempuan GOT the beat.', image: './images/winter.jpg' },
+        { name: 'Giselle', position: 'Main Rapper & Sub-Vocalist', age: 24, description: 'Uchinaga Eri (Japanese: 内永 枝利/うちなが えり) atau Kim Aeri (김애리), yang lebih dikenal dengan nama panggungnya Giselle (Korean: 지젤), adalah anggota dari aespa dengan darah campuran Korea dan Jepang.', image: './images/giselle.jpg' },
+        { name: 'Ningning', position: 'Main Vocalist & Maknae', age: 22, description: 'Ning Yi Zhuo (Chinese: 宁艺卓), yang dikenal sebagai Ningning (Hangul: 닝닝), adalah anggota asal Tiongkok, Main Vocalist, dan maknae dari aespa.', image: './images/ningning.jpg' }
+      ];
+      
+      var albums = [
+        { title: 'Armageddon (2024)', image: './images/armageddon.jpg', description: '"Armageddon" adalah album penuh pertama dari aespa yang dirilis pada 27 Mei 2024. Album ini memiliki dua lagu utama, yaitu "Supernova" dan "Armageddon," dengan "Supernova" dirilis lebih awal sebagai lagu pra-rilis pada 13 Mei 2024. Album fisiknya tersedia dalam 15 versi, termasuk Authentic, lima versi My Power, empat versi Superbeing, empat versi Poster, dan Zine, memberikan banyak pilihan menarik untuk dikoleksi oleh para penggemar.' }
+      ];
+      
+      var miniAlbums = [
+        { title: 'Savage (2021)', image: './images/savage.jpg', description: 'Savage adalah mini album pertama dari grup aespa. Album ini dirilis pada tanggal 5 Oktober 2021.  Album fisik tersedia dalam tiga versi: Hallucination Quest, SYNK DIVE, dan P.O.S.' },
+        { title: 'Girls (2022)', image: './images/girls.jpg', description: 'Girls adalah mini album kedua dari aespa, yang dirilis pada 8 Juli 2022. Lagu utama dalam album ini, "Girls," menjadi sorotan dan berhasil menarik perhatian para penggemar. Album ini hadir dalam tujuh versi fisik: Kwangya, Real World, Digipack dengan empat pilihan sampul, serta versi International, memberikan variasi menarik untuk koleksi para penggemar.' },
+        { title: 'My World (2023)', image: './images/my world.jpg', description: 'My World (ditulis dalam huruf kapital) adalah mini album ketiga dari aespa, yang dirilis pada 8 Mei 2023 dengan lagu utama berjudul "Spicy." Album ini tersedia dalam 19 versi fisik, termasuk Intro (dengan sampul masing-masing anggota), Tabloid, Zine (Welcome To My World, Spicy, eksklusif Barnes & Noble, dan eksklusif Target), Poster (dengan sampul anggota individu, eksklusif Walmart, dan eksklusif Amazon), serta SMini (dengan sampul masing-masing anggota). Album ini menawarkan banyak pilihan bagi para penggemar untuk dikoleksi.' },
+        { title: 'Drama (2023)', image: './images/drama.jpg', description: 'Drama adalah mini album keempat dari aespa, dirilis pada 10 November 2023, dengan "Drama" sebagai lagu utama sekaligus single dari album tersebut. Lagu ini terkenal dengan lirik yang catchy seperti "I bring, I bring all the dramamama," yang juga pernah digunakan oleh grup perempuan Jepang IS:SUE dan Zico. Album ini melanjutkan perjalanan aespa dalam menghadirkan musik yang penuh energi dan konsep yang segar, semakin memantapkan posisi mereka di dunia K-pop. ' }
+      ];
+      
+      var digitalSingles = [
+        { title: 'Black Mamba (2020)', image: './images/black mamba.jpg', description: '"Black Mamba" adalah single debut aespa yang dirilis oleh SM Entertainment pada 17 November 2020 sebagai single perdana mereka. Lagu ini kemudian dimasukkan ke dalam mini album kedua mereka, "Girls", yang dirilis pada 8 Juli 2022. Lagu ini ditulis dan dikomposisikan oleh Yoo Young-jin, bersama dengan Omega, Ella Isaacson, Gabriela Geneva (NIIVA), Jordan Reyes, Shaun Lopez, dan Scott Chesak. Secara musikal, "Black Mamba" adalah lagu dengan genre pop, electropop, dan dance-pop, menonjolkan suara khas synth, elemen EDM, serta bass yang dipadukan dengan hook yang adiktif. Liriknya bercerita tentang sosok bernama "Black Mamba" yang mengganggu hubungan antara para anggota dan avatar mereka, serta mengancam dunia mereka, sehingga menjadi ancaman yang dibenci oleh para anggota.' },
+        { title: 'Forever (2021)', image: './images/Forever.jpg', description: '"Forever" (Korean: 약속; RR: Yaksok; yang berarti Janji) adalah lagu yang direkam oleh grup perempuan Korea Selatan aespa. Lagu ini pertama kali dirilis sebagai single digital kedua grup pada 5 Februari 2021 oleh SM Entertainment, dan kemudian dimasukkan dalam mini album kedua mereka, Girls, yang dirilis pada 8 Juli 2022. Lagu ini merupakan remake dari lagu berjudul sama oleh Yoo Young Jin, yang sebelumnya menjadi bagian dari album liburan SM Winter Vacation in SMTown.com tahun 2000. "Forever" adalah ballad R&B dengan tempo sedang, yang menampilkan suara gitar akustik dan lirik hangat tentang menjanjikan keabadian kepada orang yang dicintai.' },
+        { title: 'Next Level (2021)', image: './images/next level.jpg', description: '"Next Level" adalah single digital ketiga dari aespa yang dirilis pada 17 Mei 2021. Lagu ini bergenre hip hop dance dengan sentuhan rap yang groovy dan riff bass yang energik. Liriknya menceritakan perjalanan menuju "KWANGYA" untuk menemukan "Black Mamba," sosok yang mengganggu hubungan antara aespa dan avatar mereka, yang menjadi bagian menarik dari alur cerita dunia aespa. Lagu ini merupakan remake dari lagu berjudul sama yang sebelumnya menjadi soundtrack film *Fast & Furious Presents: Hobbs & Shaw*, yang pertama kali dirilis pada 2019.' },
+        { title: 'Dreams Come True (2022)', image: './images/dreams come true.jpg', description: '"Dreams Come True" adalah single digital keempat dari aespa yang dirilis pada 20 Desember 2021 melalui proyek remastering SM Entertainment. Lagu ini juga berperan sebagai lagu pra-rilis dan salah satu lagu utama untuk proyek SMTOWN 2022: SMCU Express. Lagu ini merupakan remake dari lagu berjudul sama yang dinyanyikan oleh S.E.S., yang awalnya dirilis pada tahun 1998 sebagai bagian dari album penuh kedua mereka, Sea & Eugene & Shoo. Versi dari aespa ini kemudian dimasukkan dalam edisi Apple Music untuk mini album kedua mereka, Girls.' },
+        { title: 'Lifes Too Short (English Ver.) (2022)', image: './images/life too short.jpg', description: '"Lifes Too Short (English Ver.)" adalah single digital pertama aespa yang dirilis dalam bahasa Inggris. Lagu ini dirilis lebih awal pada 24 Juni 2022 sebelum dimasukkan ke dalam mini album kedua mereka, "Girls". Selain versi bahasa Inggris, lagu ini juga hadir dalam versi bahasa Korea yang turut dimasukkan dalam album tersebut, memberikan variasi menarik bagi penggemar di berbagai belahan dunia.' },
+        { title: 'Better Things (2023)', image: './images/better things.jpg', description: '"Better Things" adalah lagu dari grup K-pop aespa yang dirilis pada 18 Agustus 2023 melalui SM Entertainment dan Warner Records. Lagu ini menjadi single bahasa Inggris original pertama mereka. Ini adalah rilisan kedua aespa di tahun 2023, setelah mini album ketiga mereka, My World, yang keluar pada bulan Mei. Untuk mempromosikan lagu ini, aespa merilis serial web sitcom berjudul Better Things yang terdiri dari tiga episode, dengan episode pertama ditayangkan pada 7 Agustus. Awalnya dirilis sebagai single independen, lagu ini kemudian dimasukkan dalam edisi digital mini album keempat mereka, Drama, yang dirilis pada 10 November 2023.' },
+        { title: 'Jingle Bell Rock (2023)', image: './images/jingle bell rock.jpg', description: '"Jingle Bell Rock" adalah single digital dalam bahasa Inggris dari aespa yang dirilis pada 24 November 2023. Versi yang dipercepat dari lagu ini dirilis bersamaan pada 15 Desember 2023, bersama dengan "Drama (Sped Up Version)." Lagu ini menambah koleksi karya aespa dengan sentuhan musim liburan yang menyenangkan.' },
+        { title: 'Supernova (2024)', image: './images/supernova.jpg', description: '"Supernova" adalah single digital kedelapan dari aespa, yang dirilis pada 13 Mei 2024 sebagai lagu pra-rilis untuk album penuh pertama mereka, *Armageddon*. Lagu ini menjadi langkah awal yang menggambarkan antusiasme aespa dalam membawa karya baru yang penuh energi dan inovasi ke dunia K-pop.' }
+      ];
+      
+      // Member modal
+      $('.member-card').click(function() {
+        var m = members[$(this).data('index')];
+        $('#modal-body').html(
+          '<img src="'+ m.image +'" alt="'+ m.name +'" style="border-radius:8px; margin-bottom:15px;">' +
+          '<h2>'+ m.name +'</h2>' +
+          '<p><strong>Posisi:</strong> '+ m.position +'</p>' +
+          '<p><strong>Usia:</strong> '+ m.age +' tahun</p>' +
+          '<p>'+ m.description +'</p>'
+        );
+        $('#modal').fadeIn(300);
+      });
+      $('#modal .close').click(function() { $('#modal').fadeOut(300); });
+      
+      // Populate grid untuk kategori Album
+      $.each(albums, function(i, item) {
+        $('.album-grid').append(
+          $('<div class="album-item" data-index="'+ i +'">')
+            .append('<img src="'+ item.image +'" alt="'+ item.title +'">')
+            .append('<div class="caption">'+ item.title +'</div>')
+            .append('<p class="album-description">'+ item.description +'</p>')
+        );
+      });
+      $('.album-grid .album-item').click(function() {
+        var index = $(this).data('index');
+        var item = albums[index];
+        $('#album-modal-body').html(
+          '<img src="'+ item.image +'" alt="'+ item.title +'" style="border-radius:8px; margin-bottom:15px;">' +
+          '<h2>'+ item.title +'</h2>' +
+          '<p class="album-description">'+ item.description +'</p>'
+        );
+        $('#album-modal').fadeIn(300);
+      });
+      
+      // Populate grid untuk kategori Mini Album
+      $.each(miniAlbums, function(i, item) {
+        $('.mini-album-grid').append(
+          $('<div class="album-item" data-index="'+ i +'">')
+            .append('<img src="'+ item.image +'" alt="'+ item.title +'">')
+            .append('<div class="caption">'+ item.title +'</div>')
+            .append('<p class="album-description">'+ item.description +'</p>')
+        );
+      });
+      $('.mini-album-grid .album-item').click(function() {
+        var index = $(this).data('index');
+        var item = miniAlbums[index];
+        $('#album-modal-body').html(
+          '<img src="'+ item.image +'" alt="'+ item.title +'" style="border-radius:8px; margin-bottom:15px;">' +
+          '<h2>'+ item.title +'</h2>' +
+          '<p class="album-description">'+ item.description +'</p>'
+        );
+        $('#album-modal').fadeIn(300);
+      });
+      
+      // Populate grid untuk kategori Single Digital
+      $.each(digitalSingles, function(i, item) {
+        $('.single-digital-grid').append(
+          $('<div class="album-item" data-index="'+ i +'">')
+            .append('<img src="'+ item.image +'" alt="'+ item.title +'">')
+            .append('<div class="caption">'+ item.title +'</div>')
+            .append('<p class="album-description">'+ item.description +'</p>')
+        );
+      });
+      $('.single-digital-grid .album-item').click(function() {
+        var index = $(this).data('index');
+        var item = digitalSingles[index];
+        $('#album-modal-body').html(
+          '<img src="'+ item.image +'" alt="'+ item.title +'" style="border-radius:8px; margin-bottom:15px;">' +
+          '<h2>'+ item.title +'</h2>' +
+          '<p class="album-description">'+ item.description +'</p>'
+        );
+        $('#album-modal').fadeIn(300);
+      });
+      
+      // Modal close handlers & Slider functionality
+      $('#album-close, #gallery-close, #modal .close').click(function() { $('.modal').fadeOut(300); });
+      
+      $(window).click(function(e) {
+        if ($(e.target).hasClass('modal')) {
+          $(e.target).fadeOut(300);
+        }
+      });
+      
+      var slideIndex = 0, totalSlides = $('.slide').length;
+      function updateSlider() {
+        $('.slides').css('transform', 'translateX(-' + (slideIndex * 100) + '%)');
+      }
+      $('.next').click(function() { 
+        slideIndex = (slideIndex + 1) % totalSlides; 
+        updateSlider();
+      });
+      $('.prev').click(function() { 
+        slideIndex = (slideIndex - 1 + totalSlides) % totalSlides; 
+        updateSlider();
+      });
+      setInterval(function() { 
+        slideIndex = (slideIndex + 1) % totalSlides; 
+        updateSlider();
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
