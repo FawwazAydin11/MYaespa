@@ -1,18 +1,18 @@
 # MYaespa
-MYaespa adalah platform berbasis web yang dirancang untuk para penggemar aespa, grup K-pop inovatif yang telah mengubah lanskap industri hiburan. Melalui situs ini, penggemar dapat menikmati berbagai fitur menarik yang menyuguhkan pengalaman interaktif sekaligus informatif.
+MYaespa adalah platform online yang diciptakan untuk para penggemar aespa. Situs ini dirancang untuk memberikan pengalaman yang interaktif sekaligus memberikan informasi yang berguna, sehingga penggemar dapat lebih mengenal aespa.
 
 Fitur Utama
 
-1. Beranda: Sambutan hangat yang memperkenalkan dunia aespa dan merayakan pencapaian mereka.
+1. Beranda: Sambutan hangat bagi para MY maupun pecinta K-Pop ketika masuk pertama kali dalam website ini.
 
-2. Tentang Aespa: Penjelasan singkat tentang konsep futuristik grup, termasuk avatar digital yang menghubungkan mereka dengan dunia maya.
+2. Tentang Aespa: Penjelasan singkat tentang apa itu aespa.
 
-3. Anggota: Profil visual dan informasi lengkap setiap anggota aespa, membawa penggemar lebih dekat dengan bintang favorit mereka.
+3. Anggota: Informasi lengkap tentang setiap anggota aespa, termasuk profil dengan gambar mereka.
 
-4. Prestasi: Koleksi penghargaan yang diatur berdasarkan tahun, disajikan dengan fitur interaktif untuk pengalaman yang lebih seru.
+4. Prestasi: Daftar penghargaan mereka yang disusun berdasarkan tahun, dengan tampilan yang mudah diakses.
 
-5. Diskografi: Tampilkan karya musik aespa dalam bentuk galeri album, dilengkapi dengan deskripsi menarik setiap rilisan.
+5. Diskografi: Koleksi karya musik aespa, mulai dari album hingga single, lengkap dengan deskripsi singkat tentang setiap rilisan.
    
-7. Galeri: Slider dinamis yang menyuguhkan berbagai potret eksklusif aespa.
+7. Galeri: Kumpulan foto aespa yang ditampilkan dalam format slider.
    
-9. Desain Responsif: Tampilan yang menyesuaikan berbagai perangkat, memastikan kenyamanan pengguna baik di layar desktop maupun handphone.
+9. Desain Responsif: Situs ini dirancang agar nyaman digunakan di berbagai perangkat, baik desktop maupun ponsel.
