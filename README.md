@@ -1,5 +1,5 @@
 # MYaespa
-Aespa Fan Site adalah platform berbasis web yang dirancang untuk para penggemar aespa, grup K-pop inovatif yang telah mengubah lanskap industri hiburan. Melalui situs ini, penggemar dapat menikmati berbagai fitur menarik yang menyuguhkan pengalaman interaktif sekaligus informatif.
+MYaespa adalah platform berbasis web yang dirancang untuk para penggemar aespa, grup K-pop inovatif yang telah mengubah lanskap industri hiburan. Melalui situs ini, penggemar dapat menikmati berbagai fitur menarik yang menyuguhkan pengalaman interaktif sekaligus informatif.
 
 Fitur Utama
 
